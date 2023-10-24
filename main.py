@@ -8,9 +8,10 @@ app = Flask(__name__)
 db = GlobantDB()
 
 
-@app.route('/home')
-def home():
-    return "Hello World!"
+@app.route('/create_tables')
+def create_tables():
+    db.create_tables()
+    return "Tables created!"
 
 
 if __name__ == "__main__":
