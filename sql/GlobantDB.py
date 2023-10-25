@@ -43,7 +43,7 @@ class GlobantDB:
             './globant-DE-challenge/csv_files/jobs.csv', header=None)
         jobs_df.columns = ['id', 'job']
         # adding method='multi' speeds up process, but needs error handling for duplicates.
-        jobs_df.to_sql('jobs', con, if_exists='append', index=False)
+        jobs_df.to_sql('jobs', con, if_exists='replace', index=False)
         con.commit()
 
     def get_jobs(self):
