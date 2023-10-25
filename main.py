@@ -45,5 +45,15 @@ def hired_employees():
         return jsonify(db.get_hired_employees())
 
 
+@app.route('/hires_by_quarter_2021')
+def hires_by_quarter_2021():
+    return jsonify(db.hires_by_quarter_2021())
+
+
+@app.route('/top_hiring_departments_2021')
+def top_hiring_departments_2021():
+    return jsonify(db.top_hiring_departments_2021())
+
+
 if __name__ == "__main__":
     app.run(host='127.0.0.1', port=1995)
