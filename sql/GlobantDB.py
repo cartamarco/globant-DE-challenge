@@ -25,8 +25,8 @@ class GlobantDB:
             id INTEGER PRIMARY KEY,
             name TEXT NOT NULL,
             datetime TEXT NOT NULL,
-            department_id INTEGER NOT NULL,
-            job_id INTEGER NOT NULL,
+            department_id INTEGER NULL,
+            job_id INTEGER NULL,
             FOREIGN KEY (department_id)
                 REFERENCES departments(id)
             FOREIGN KEY (job_id)
