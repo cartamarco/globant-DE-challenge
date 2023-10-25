@@ -38,12 +38,42 @@ class GlobantDB:
 
     def bulk_insert_jobs(self):
         con = sqlite3.connect(self.connection_string)
-        jobs_df = pd.read_csv('./csv_files/jobs.csv')
+        jobs_df = pd.read_csv('./globant-DE-challenge/csv_files/jobs.csv')
         jobs_df.columns = ['id', 'job']
+        # adding method='multi' speeds up process, but needs error handling for duplicates.
         jobs_df.to_sql('jobs', con, if_exists='append', index=False)
         con.commit()
 
     def get_jobs(self):
         con = sqlite3.connect(self.connection_string)
         query = "SELECT * FROM jobs"
-        return con.execute(query).fectchall()
+        return con.execute(query).fetchall()
+
+    def bulk_insert_departments(self):
+        con = sqlite3.connect(self.connection_string)
+        jobs_df = pd.read_csv(
+            './globant-DE-challenge/csv_files/departments.csv')
+        jobs_df.columns = ['id', 'department']
+        # adding method='multi' speeds up process, but needs error handling for duplicates.
+        jobs_df.to_sql('departments', con, if_exists='replace', index=False)
+        con.commit()
+
+    def get_departments(self):
+        con = sqlite3.connect(self.connection_string)
+        query = "SELECT * FROM departments"
+        return con.execute(query).fetchall()
+
+    def bulk_insert_hired_employees(self):
+        con = sqlite3.connect(self.connection_string)
+        jobs_df = pd.read_csv(
+            './globant-DE-challenge/csv_files/hired_employees.csv')
+        jobs_df.columns = ['id', 'name', 'datetime', 'department_id', 'job_id']
+        # adding method='multi' speeds up process, but needs error handling for duplicates.
+        jobs_df.to_sql('hired_employees', con,
+                       if_exists='replace', index=False)
+        con.commit()
+
+    def get_hired_employees(self):
+        con = sqlite3.connect(self.connection_string)
+        query = "SELECT * FROM hired_employees"
+        return con.execute(query).fetchall()

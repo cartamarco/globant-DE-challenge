@@ -27,5 +27,23 @@ def jobs():
         return jsonify(db.get_jobs())
 
 
+@app.route('/departments', methods=['GET', 'POST'])
+def departments():
+    if request.method == 'POST':
+        db.bulk_insert_departments()
+        return "departments inserted!"
+    if request.method == 'GET':
+        return jsonify(db.get_departments())
+
+
+@app.route('/hired_employees', methods=['GET', 'POST'])
+def hired_employees():
+    if request.method == 'POST':
+        db.bulk_insert_hired_employees()
+        return "Hired employees inserted!"
+    if request.method == 'GET':
+        return jsonify(db.hired_employees())
+
+
 if __name__ == "__main__":
     app.run(host='127.0.0.1', port=1995)
