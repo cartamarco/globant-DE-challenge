@@ -30,6 +30,7 @@ class GlobantDB:
             FOREIGN KEY (department_id)
                 REFERENCES departments(id)
             FOREIGN KEY (job_id)
+
                 REFERENCES jobs(id)
         );
         """
@@ -38,7 +39,8 @@ class GlobantDB:
 
     def bulk_insert_jobs(self):
         con = sqlite3.connect(self.connection_string)
-        jobs_df = pd.read_csv('./globant-DE-challenge/csv_files/jobs.csv')
+        jobs_df = pd.read_csv(
+            './globant-DE-challenge/csv_files/jobs.csv', header=None)
         jobs_df.columns = ['id', 'job']
         # adding method='multi' speeds up process, but needs error handling for duplicates.
         jobs_df.to_sql('jobs', con, if_exists='append', index=False)
@@ -52,7 +54,7 @@ class GlobantDB:
     def bulk_insert_departments(self):
         con = sqlite3.connect(self.connection_string)
         jobs_df = pd.read_csv(
-            './globant-DE-challenge/csv_files/departments.csv')
+            './globant-DE-challenge/csv_files/departments.csv', header=None)
         jobs_df.columns = ['id', 'department']
         # adding method='multi' speeds up process, but needs error handling for duplicates.
         jobs_df.to_sql('departments', con, if_exists='replace', index=False)
@@ -66,7 +68,7 @@ class GlobantDB:
     def bulk_insert_hired_employees(self):
         con = sqlite3.connect(self.connection_string)
         jobs_df = pd.read_csv(
-            './globant-DE-challenge/csv_files/hired_employees.csv')
+            './globant-DE-challenge/csv_files/hired_employees.csv', header=None)
         jobs_df.columns = ['id', 'name', 'datetime', 'department_id', 'job_id']
         # adding method='multi' speeds up process, but needs error handling for duplicates.
         jobs_df.to_sql('hired_employees', con,
