@@ -42,7 +42,7 @@ def hired_employees():
         db.bulk_insert_hired_employees()
         return "Hired employees inserted!"
     if request.method == 'GET':
-        return jsonify(db.hired_employees())
+        return jsonify(db.get_hired_employees())
 
 
 if __name__ == "__main__":
