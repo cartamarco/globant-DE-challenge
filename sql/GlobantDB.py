@@ -42,8 +42,8 @@ class GlobantDB:
         jobs_df = pd.read_csv(
             './globant-DE-challenge/csv_files/jobs.csv', header=None)
         jobs_df.columns = ['id', 'job']
-        # adding method='multi' speeds up process, but needs error handling for duplicates.
-        jobs_df.to_sql('jobs', con, if_exists='replace', index=False)
+        jobs_df.to_sql('jobs', con, if_exists='replace',
+                       index=False, method='multi')
         con.commit()
 
     def get_jobs(self):
@@ -56,8 +56,8 @@ class GlobantDB:
         jobs_df = pd.read_csv(
             './globant-DE-challenge/csv_files/departments.csv', header=None)
         jobs_df.columns = ['id', 'department']
-        # adding method='multi' speeds up process, but needs error handling for duplicates.
-        jobs_df.to_sql('departments', con, if_exists='replace', index=False)
+        jobs_df.to_sql('departments', con, if_exists='replace',
+                       index=False, method='multi')
         con.commit()
 
     def get_departments(self):
@@ -70,9 +70,8 @@ class GlobantDB:
         jobs_df = pd.read_csv(
             './globant-DE-challenge/csv_files/hired_employees.csv', header=None)
         jobs_df.columns = ['id', 'name', 'datetime', 'department_id', 'job_id']
-        # adding method='multi' speeds up process, but needs error handling for duplicates.
         jobs_df.to_sql('hired_employees', con,
-                       if_exists='replace', index=False)
+                       if_exists='replace', index=False, method='multi')
         con.commit()
 
     def get_hired_employees(self):
